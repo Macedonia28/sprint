@@ -49,13 +49,16 @@ public class userController {
      return userService.buscar(id);
   }
  @GetMapping("/id")
-  public List<UserDto> eliminar(
-      @RequestParam("numero1") Long id){
+  public List<UserDto> eliminar(@RequestParam("id") Long id){
    
      return userService.eliminar(id);
   }
-  
-  
+  @PostMapping("/actualizar")
+   public List<UserDto> actualizar( @RequestParam("id") Long id,@RequestParam("id") String userName,
+   @RequestParam("password") String password,@RequestParam("name") String name,@RequestParam("email") String email){
+   
+     return userService.actualizar(id, userName, password, name, email);
+  }
   }
 
 

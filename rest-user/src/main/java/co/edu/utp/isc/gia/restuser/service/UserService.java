@@ -45,8 +45,7 @@ public class UserService {
      return users.get(id.intValue()-1);
   }
   
-  public List<UserDto> eliminar(
-      @RequestParam("numero1") Long id){
+  public List<UserDto> eliminar(@RequestParam("id") Long id){
    
       int indice=0;
       
@@ -58,4 +57,19 @@ public class UserService {
   
      return users;
 }
+  public List<UserDto> actualizar( @RequestParam("id") Long id,@RequestParam("UserName") String userName,
+          @RequestParam("password") String password,@RequestParam("name") String name,@RequestParam("email") String email){
+       int indice=0;
+       while(users.get(indice).getId()!=id){
+           indice++;
+          
+      }
+        users.get(indice).setUserName(userName);
+        users.get(indice).setPassword(password);
+        users.get(indice).setUserName(userName);
+        users.get(indice).setEmail(email);
+        
+        return users;
+  }
+  
 }
