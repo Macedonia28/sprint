@@ -7,6 +7,7 @@ package co.edu.utp.isc.gia.restuser.web.controller;
 
 
 
+import co.edu.utp.isc.gia.restuser.service.UserService;
 import co.edu.utp.isc.gia.restuser.web.dto.UserDto;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,46 +25,34 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("user")
 public class userController {
-    
- private List<UserDto>users=new ArrayList<>();
- 
+  UserService userService;  
+
+    public userController(UserService userService) {
+        this.userService = userService;
+    }
+
+  
  @PostMapping()
   public UserDto save(UserDto user){
-      user.setId(users.size()+1L);
-      for(int i=0;i<users.size();i++){
-        if(user.getId()==users.size()){
-           user.setUserName(user.getUserName().toLowerCase());
-           users.add(user);
-            return user;
-          } 
+      return userService.save(user);
       }
-      user.setId(users.size()+1L);
-      user.setUserName(user.getUserName().toLowerCase());
-      users.add(user);
-      return user;
+
       
-  }
+  
   @GetMapping
   public List<UserDto> listAll(){
-      return users;
+      return userService.listAll();
       }
+
   @GetMapping("/{id}")
   public UserDto buscar(@PathVariable("id") Long id){
-     return users.get(id.intValue()-1);
+     return userService.buscar(id);
   }
  @GetMapping("/id")
   public List<UserDto> eliminar(
       @RequestParam("numero1") Long id){
    
-      int indice=0;
-      
-      while(users.get(indice).getId()!=id){
-          indice++;
-          
-      }
-      users.remove(indice);
-  
-     return users;
+     return userService.eliminar(id);
   }
   
   
