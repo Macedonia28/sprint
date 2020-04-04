@@ -30,34 +30,27 @@ public class userController {
     public userController(UserService userService) {
         this.userService = userService;
     }
-
+@GetMapping("/eliminar")
+  public void eliminar(@RequestParam("id") Long id){
+   userService.eliminar(id);
+  }
   
  @PostMapping()
   public UserDto save(UserDto user){
       return userService.save(user);
+      
       }
 
       
   
-  @GetMapping
-  public List<UserDto> listAll(){
-      return userService.listAll();
+  @GetMapping("/listar")
+     public List<UserDto> findAll(){
+       return userService.findAll();
       }
 
-  @GetMapping("/{id}")
-  public UserDto buscar(@PathVariable("id") Long id){
-     return userService.buscar(id);
-  }
- @GetMapping("/id")
-  public List<UserDto> eliminar(@RequestParam("id") Long id){
-   
-     return userService.eliminar(id);
-  }
-  @PostMapping("/actualizar")
-   public List<UserDto> actualizar( @RequestParam("id") Long id,@RequestParam("id") String userName,
-   @RequestParam("password") String password,@RequestParam("name") String name,@RequestParam("email") String email){
-   
-     return userService.actualizar(id, userName, password, name, email);
+   @GetMapping("/buscar")
+   public UserDto buscar(@RequestParam("id") Long id){
+    return userService.buscar(id);
   }
   }
 
