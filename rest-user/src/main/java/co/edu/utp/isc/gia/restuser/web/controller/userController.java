@@ -52,6 +52,11 @@ public class userController {
    public UserDto buscar(@RequestParam("id") Long id){
     return userService.buscar(id);
   }
+   @RequestMapping("actualizar")
+   public UserDto  actualizar(UserDto user){
+       
+       return userService.actualizar(user);
+   }
   }
 
 

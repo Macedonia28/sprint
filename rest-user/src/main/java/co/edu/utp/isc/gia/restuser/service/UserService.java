@@ -10,6 +10,7 @@ import co.edu.utp.isc.gia.restuser.data.repository.UserRepository;
 import co.edu.utp.isc.gia.restuser.web.dto.UserDto;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,9 +37,18 @@ public class UserService {
     User myUser=modelMapper.map(user,User.class);
      myUser= userRepository.save(myUser);
      UserDto resp=modelMapper.map(myUser,UserDto.class);
-     System.out.println(resp.getId());
     
       return resp;
+ }
+ 
+ public UserDto  actualizar(UserDto user){
+    Optional<User>u=this.userRepository.findById(user.getId());
+      User myUser=modelMapper.map(user,User.class);
+     myUser= userRepository.save(myUser);
+     UserDto resp=modelMapper.map(myUser,UserDto.class);
+     
+     return resp;
+     
  }
 
    
