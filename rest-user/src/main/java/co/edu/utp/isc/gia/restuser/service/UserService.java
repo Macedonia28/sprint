@@ -52,9 +52,7 @@ public class UserService {
          
      listaUsuarios.add(modelMapper.map(i,UserDto.class));
      }
-     while(cont!=2){
-         System.out.println(cont++);
-     }
+  
              
      return listaUsuarios;
  }
